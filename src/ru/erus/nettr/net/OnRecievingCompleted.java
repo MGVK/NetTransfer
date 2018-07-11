@@ -1,6 +1,6 @@
 package ru.erus.nettr.net;
 
-import ru.erus.nettr.Data.DataBundle;
+import ru.erus.nettr.data.DataBundle;
 
 public interface OnRecievingCompleted {
 

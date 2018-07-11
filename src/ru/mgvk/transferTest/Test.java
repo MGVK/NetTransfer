@@ -1,6 +1,6 @@
 package ru.mgvk.transferTest;
 
-import ru.erus.nettr.Data.DataBundle;
+import ru.erus.nettr.data.DataBundle;
 import ru.erus.nettr.net.Reciever;
 import ru.erus.nettr.net.Transmitter;
 

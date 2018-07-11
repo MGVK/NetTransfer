@@ -1,4 +1,4 @@
-package ru.erus.nettr.Data;
+package ru.erus.nettr.data;
 
 import java.io.*;
 import java.util.HashMap;
