@@ -7,7 +7,9 @@ public class TestServer {
 
     public static void main(String[] args) throws InterruptedException {
 
-        NetTransfer transfer = new NetTransfer(5555)
+        int port = 5555;
+
+        NetTransfer transfer = new NetTransfer(port)
                 .send(new DataBundle().putInteger("0", 0))
                 .receive((result, dataBundle) -> System.out.println(dataBundle.getInteger("1", -1)))
                 .send(new DataBundle().putInteger("123", 101010))
