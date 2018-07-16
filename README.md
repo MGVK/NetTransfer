@@ -3,11 +3,11 @@ Small lib, that allow to transfer data throw tcp without coding sockets. All you
 
 Howto:
 
-Server:
+### Server:
 
-int port = 5555;
-
-NetTransfer transfer = new NetTransfer(port) //init server
+    int port = 5555;
+    
+    NetTransfer transfer = new NetTransfer(port) //init server
                 .send(new DataBundle().putInteger("0", 0))  //send data
                 .receive((result, dataBundle) -> System.out.println(dataBundle.getInteger("1", -1))) //receive data
                 .send(new DataBundle().putInteger("123", 101010))
@@ -16,17 +16,17 @@ NetTransfer transfer = new NetTransfer(port) //init server
                 
                 
                 
-while (transfer.isWorking()) { //may be useful for console applications
-  Thread.sleep(1000);
-}
+    while (transfer.isWorking()) { //may be useful for console applications
+        Thread.sleep(1000);
+    }
 
 
-Client:
+### Client:
 
-String ip="127.0.0.1";
-int port = 5555;
+    String ip="127.0.0.1";
+    int port = 5555;
 
- new NetTransfer(ip, port) // init client 
+    new NetTransfer(ip, port) // init client 
                     .receive((result, dataBundle) -> System.out.println(dataBundle.getInteger("0", 0))) //receive data
                     .send(new DataBundle().putInteger("1", 1).putInteger("2", 2)) //send data
                     .receive((result, dataBundle) -> System.out.println(dataBundle.getInteger("123", -1)))
