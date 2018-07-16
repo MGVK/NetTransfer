@@ -7,21 +7,13 @@ import java.net.Socket;
 
 public class Transmitter {
 
-    private String ip   = "";
-    private int    port = 0;
-
-    public Transmitter(String ip, int port) {
-        this.ip = ip;
-        this.port = port;
-    }
-
-    public void transfer(DataBundle dataBundle) {
+    public static void transfer(Socket socket, String ip, int port, DataBundle dataBundle, boolean close) {
 
         try {
-            Socket socket = new Socket(ip, port);
 
+            System.out.println("send to " + socket.getInetAddress());
             dataBundle.writeToStream(socket.getOutputStream());
-            if (!socket.isClosed()) {
+            if (close && !socket.isClosed()) {
                 socket.close();
             }
 

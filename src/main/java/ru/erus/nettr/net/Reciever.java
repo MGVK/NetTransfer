@@ -3,7 +3,6 @@ package ru.erus.nettr.net;
 import ru.erus.nettr.data.DataBundle;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Reciever {
@@ -21,6 +20,31 @@ public class Reciever {
         this.port = port;
     }
 
+    public static void recieve(Socket socket, int port, OnRecievingCompleted onRecievingCompleted) {
+        DataBundle bundle = new DataBundle();
+        int        result = 0;
+
+        try {
+            System.out.println("receive from " + socket.getInetAddress());
+            bundle.loadFromStream(socket.getInputStream());
+
+//            if (!socket.isClosed()) {
+//                socket.close();
+//            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            result = -1;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            result = -2;
+        }
+
+        if (onRecievingCompleted != null) {
+            onRecievingCompleted.onComplete(result, bundle);
+        }
+    }
+
     public void waitForRecieving() {
         new Worker().start();
     }
@@ -34,31 +58,8 @@ public class Reciever {
         @Override
         public void run() {
 
-            DataBundle bundle = new DataBundle();
-            int        result = 0;
+//            receive();
 
-            try {
-
-                ServerSocket server = new ServerSocket(port);
-                Socket       socket = server.accept();
-                bundle.loadFromStream(socket.getInputStream());
-
-                if (!socket.isClosed()) {
-                    socket.close();
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                result = -1;
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                result = -2;
-            }
-
-
-            if (onRecievingCompleted != null) {
-                onRecievingCompleted.onComplete(result, bundle);
-            }
 
         }
     }

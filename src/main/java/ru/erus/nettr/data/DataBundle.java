@@ -46,7 +46,6 @@ public class DataBundle implements Serializable {
         if (inputStream != null) {
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
             map = (HashMap<String, Object>) objectInputStream.readObject();
-            objectInputStream.close();
         }
 
     }
@@ -56,7 +55,6 @@ public class DataBundle implements Serializable {
         if (outputStream != null) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(map);
-            objectOutputStream.close();
         }
 
     }
